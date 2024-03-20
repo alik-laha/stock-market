@@ -3,13 +3,16 @@ import { CgProfile } from "react-icons/cg";
 import {NavLink} from "react-router-dom"
 import {ChangeEvent} from "react";
 import axios from  'axios'
+import {useContext} from "react";
+import Context from "../../src/Context/Context.ts";
 
 function Navbar() {
-
+    const {setSearchData}=useContext(Context)
     const handleChange=(e:ChangeEvent<HTMLInputElement>)=>{
        axios.post("http://localhost:3000/api/search",{searchData:e.target.value})
-           .then((data)=>{
-               console.log(data)
+           .then((res)=>{
+              setSearchData(res.data.data.content)
+               // console.log(res.data.data.content)
            })
            .catch((err)=>{
                console.log(err)
