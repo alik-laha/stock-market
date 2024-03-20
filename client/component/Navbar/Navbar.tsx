@@ -7,7 +7,7 @@ import axios from  'axios'
 function Navbar() {
 
     const handleChange=(e:ChangeEvent<HTMLInputElement>)=>{
-       axios.post("http://localhost:3000/api",{searchData:e.target.value})
+       axios.post("http://localhost:3000/api/search",{searchData:e.target.value})
            .then((data)=>{
                console.log(data)
            })
