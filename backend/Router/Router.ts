@@ -9,7 +9,7 @@ router.post("/search",Searchdata)
 
 router.post("/detail",Detail)
 
-router.post("/candales",ChartData)
+router.post("/candle",ChartData)
 
 export default router
 

@@ -97,6 +97,12 @@ export const ChartData=(req:Request,res:Response)=>{
             interval="noOfCandles"
         }
         fetch(`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${CompanyName}/${time}?${interval}=${gap}&minimal=true`)
+            .then((res) => res.json())
+            .then((data) => {
+                return res.status(200).json({data: data})
+            }).catch((err) => {
+            return res.status(400).json({msg: "No data found"})
+        })
     }catch(err){
         console.log(err)
     }

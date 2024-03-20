@@ -71,3 +71,37 @@ export const Detail = (req, res) => {
         return res.status(200).json({ msg: "Internal server Error" });
     }
 };
+export const ChartData = (req, res) => {
+    try {
+        const { time, gap, CompanyName } = req.body;
+        let interval;
+        if (time === "weekly") {
+            interval = "intervalInMinutes";
+        }
+        else if (time === "1y") {
+            interval = "intervalInDays";
+        }
+        else if (time === "daily") {
+            interval = "intervalInMinutes";
+        }
+        else if (time === "5y") {
+            interval = "intervalInDays";
+        }
+        else if (time === "3y") {
+            interval = "intervalInDays";
+        }
+        else if (time === "all") {
+            interval = "noOfCandles";
+        }
+        fetch(`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${CompanyName}/${time}?${interval}=${gap}&minimal=true`)
+            .then((res) => res.json())
+            .then((data) => {
+            return res.status(200).json({ data: data });
+        }).catch((err) => {
+            return res.status(400).json({ msg: "No data found" });
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+};
