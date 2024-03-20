@@ -6,6 +6,7 @@ import Navbar from "../component/Navbar/Navbar.tsx";
 import Profile from "../component/Profile/Profile.tsx";
 import About from "../component/About/About.tsx";
 import Signup from "../component/Signup/Signup.tsx";
+import FloatingWindow from "../component/FloatingSearchBar/FloatingSearchBar.tsx";
 function App() {
 
 
@@ -13,9 +14,9 @@ function App() {
     <>
         <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<><Navbar/><Home/></>} />
-        <Route path="/profile" element={<><Navbar/><Profile/>  </>}/>
-        <Route path="/about" element={<><Navbar/><About/>  </>}/>
+        <Route path="/" element={<><Navbar/><FloatingWindow/><Home/></>} />
+        <Route path="/profile" element={<><Navbar/><FloatingWindow/><Profile/>  </>}/>
+        <Route path="/about" element={<><Navbar/><FloatingWindow/><About/>  </>}/>
         <Route path="/signup" element={<Signup/>} />
         </Routes>
     </>

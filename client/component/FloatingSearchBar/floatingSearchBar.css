@@ -1,0 +1,22 @@
+.floating-window {
+    position: fixed;
+    right: 5em;
+    top: 4em;/* Adjust this value to position it where you want */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 18em; /* Expanded width */
+    height: 25em; /* Expanded height */
+    /*width: 50px; !* Initial width *!*/
+    /*height: 50px; !* Initial height *!*/
+    display: none;
+}
+
+.float-on{
+    display: inherit;
+}
+.content {
+    padding: 20px;
+}

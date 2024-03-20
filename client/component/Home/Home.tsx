@@ -1,6 +1,7 @@
 // import {useEffect,useState} from "react";
 // import axios from "axios";
 
+
 const Home=()=>{
     // const[page,setPage]=useState(0)
     // const [size,setSize]=useState(5)
@@ -16,6 +17,7 @@ const Home=()=>{
     // }, []);
     return(
         <>
+
             <h1>Home</h1>
         </>
     )
