@@ -43,7 +43,7 @@ export const HomeData=(req:Request,res:Response)=> {
             else if(type==="news"){
                 search="STOCKS_IN_NEWS"
             }
-            else{
+            else if(type==="value"){
                 search="MOST_VALUABLE"
             }
             fetch(`https://groww.in/v1/api/stocks_data/v2/explore/list/top?discoveryFilterTypes=${search}&page=${page}&size=${size}`)
@@ -58,3 +58,19 @@ export const HomeData=(req:Request,res:Response)=> {
         return res.status(400).json({msg: "no data found"})
     }
 }
+
+export const Detail=(req:Request,res:Response)=>{
+    try{
+        const{searchId}=req.body
+        fetch(`https://groww.in/v1/api/stocks_data/v1/company/search_id/${searchId}?page=0&size=50`)
+            .then((res) => res.json())
+            .then((data) => {
+                return res.status(200).json({data: data})
+            }).catch((err) => {
+            return res.status(400).json({msg: "No data found"})
+        })
+    }catch(err){
+        return res.status(200).json({msg:"Internal server Error"})
+    }
+}
+
