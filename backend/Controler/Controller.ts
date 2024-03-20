@@ -74,3 +74,31 @@ export const Detail=(req:Request,res:Response)=>{
     }
 }
 
+export const ChartData=(req:Request,res:Response)=>{
+    try{
+        const{time,gap,CompanyName}=req.body
+        let interval
+        if(time==="weekly"){
+          interval="intervalInMinutes"
+        }
+        else if(time==="1y"){
+            interval="intervalInDays"
+        }
+        else if(time==="daily"){
+            interval="intervalInMinutes"
+        }
+        else if(time==="5y"){
+            interval="intervalInDays"
+        }
+        else if(time==="3y"){
+            interval="intervalInDays"
+        }
+        else if(time==="all"){
+            interval="noOfCandles"
+        }
+        fetch(`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${CompanyName}/${time}?${interval}=${gap}&minimal=true`)
+    }catch(err){
+        console.log(err)
+    }
+}
+
