@@ -1,5 +1,6 @@
 import express from "express";
 const router = express.Router();
-import { Searchdata } from "../Controler/Controller.js";
-router.post("/", Searchdata);
+import { HomeData, Searchdata } from "../Controler/Controller.js";
+router.post("/search", Searchdata);
+router.post("/", HomeData);
 export default router;

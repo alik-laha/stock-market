@@ -1,8 +1,10 @@
 import express from "express"
 const router = express.Router()
-import {Searchdata} from "../Controler/Controller.js"
+import {HomeData, Searchdata} from "../Controler/Controller.js"
 
-router.post("/",Searchdata)
+router.post("/search",Searchdata)
+
+router.post("/",HomeData)
 
 export default router
 
