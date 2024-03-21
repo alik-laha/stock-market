@@ -7,10 +7,7 @@
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-    width: 18em; /* Expanded width */
-    height: 25em; /* Expanded height */
-    /*width: 50px; !* Initial width *!*/
-    /*height: 50px; !* Initial height *!*/
+    width: 17em; /* Expanded width */
     display: none;
 }
 

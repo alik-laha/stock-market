@@ -108,3 +108,11 @@ export const ChartData=(req:Request,res:Response)=>{
     }
 }
 
+export const SignUp=(req:Request,res:Response)=>{
+try{
+
+}catch(err){
+    return res.status(200).json({msg:"err while signing up"})
+}
+}
+

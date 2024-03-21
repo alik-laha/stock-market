@@ -4,7 +4,7 @@ const FloatingWindow = () => {
 
     return (
         <div className={`floating-window float-on`} >
-            {/*float-on for manupulate display ogf search window*/}
+            {/*float-on for manupulate display of search window*/}
             <div className="content">
                 {/* Content of the floating window */}
                 <h2>Floating Window</h2>

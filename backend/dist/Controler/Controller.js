@@ -105,3 +105,10 @@ export const ChartData = (req, res) => {
         console.log(err);
     }
 };
+export const SignUp = (req, res) => {
+    try {
+    }
+    catch (err) {
+        return res.status(200).json({ msg: "err while signing up" });
+    }
+};
