@@ -3,24 +3,27 @@ import {email} from "../Type/GlobalType.js";
 
 
 export const sendEmail=async({email,emailType,id}:email)=>{
-
-    const transporter = nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false, // Use `true` for port 465, `false` for all other ports
+    console.log(email)
+    const transport = nodemailer.createTransport({
+        host: "sandbox.smtp.mailtrap.io",
+        port: 2525,
         auth: {
-            user: "maddison53@ethereal.email",
-            pass: "jn7jnAPss4f63QBp6D",
-        },
+            user: "8c76404aa3baf2",
+            pass: "b176ee2df5d40a"
+        }
     });
-
     const Mail={
-        from: 'aliklaha@alik.com',
+        from: 'aliklaha0@gmail.com',
             to: email,
         subject: emailType==="Varify" ? "Varify Your Email" : "Forgot Password",
         text: "Hello world?",
-        html: "<b>Hello world?</b>",
+        html: "<h1>Hello world?</h1>",
     }
 
-    const info = await transporter.sendMail(Mail)
+   await transport.sendMail(Mail)
+
 }
+
+
+
+

@@ -1,4 +1,6 @@
 import { Request, Response } from 'express';
+import { sendEmail} from "../Helper/Mailer.js";
+
 export const Searchdata=(req:Request,res:Response)=> {
     try {
         const {searchData}=req.body
@@ -116,3 +118,14 @@ try{
 }
 }
 
+
+export const SendEmailToMe=async (req:Request,res:Response)=>{
+    const mail= {
+        email:"aliklaha.dev@gmail.com",
+        emailType:"Varify",
+        id:"adbshdasdv"
+    }
+
+   await sendEmail(mail)
+    return res.status(200).redirect("http://localhost:5173")
+}
