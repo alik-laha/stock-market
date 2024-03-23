@@ -119,13 +119,3 @@ try{
 }
 
 
-export const SendEmailToMe=async (req:Request,res:Response)=>{
-    const mail= {
-        email:"aliklaha.dev@gmail.com",
-        emailType:"Varify",
-        id:"adbshdasdv"
-    }
-
-   await sendEmail(mail)
-    return res.status(200).redirect("http://localhost:5173")
-}
