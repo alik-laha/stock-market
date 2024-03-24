@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { sendEmail} from "../Helper/Mailer.js";
 import bcrypt from "bcryptjs"
-
+import userModel from "../model/userModel.js";
 export const Searchdata=(req:Request,res:Response)=> {
     try {
         const {searchData}=req.body
@@ -115,8 +115,23 @@ export const SignUp= async (req:Request,res:Response)=>{
 try{
     const {name,email,phoneNo,password} = req.body
 
-    const numSaltRounds = 10;
-    const hash=bcrypt.hash(password, numSaltRounds);
+    const old=userModel.findOne({email})
+
+    if(old){
+        return res.status(200).json({msg:"User Already Exist"})
+    }
+    else {
+        const numSaltRounds = 10;
+        const hash=bcrypt.hash(password, numSaltRounds);
+        const User=await userModel.create({
+            name:name,
+            phoneNo:phoneNo,
+            email:email,
+            password:hash
+        })
+    }
+
+
 
    await sendEmail({email:"aliklaha0@gmail.com",emailType:"VERIFY",id:"sadbasg"})
     return res.status(200).json({msg:"msg send"})

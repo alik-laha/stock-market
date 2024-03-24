@@ -1,8 +1,8 @@
 import mongoose from "mongoose"
 
-export const cunectdb = async () => {
+ export const dbConnection = async () => {
     try{
-       await mongoose.connect(process.env.MONGO_URI!)
+       mongoose.connect(process.env.MONGO_URI!)
 
        const connection =mongoose.connection
 
@@ -21,3 +21,4 @@ export const cunectdb = async () => {
         console.log(err)
     }
 }
+
