@@ -32,8 +32,7 @@ export const sendEmail=async({email,id}:email)=>{
             "",
     }
 
-   const mailResponse=await transport.sendMail(Mail)
-    return mailResponse
+   return await transport.sendMail(Mail)
 
 }
 

@@ -20,7 +20,8 @@ label {
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="number"]{
     width: 95%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -45,4 +46,16 @@ input[type="password"] {
 
 .header{
     text-align: center;
+}
+input[type="number"]{
+    -moz-appearance: textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.error-confirmpass{
+    color: red;
 }

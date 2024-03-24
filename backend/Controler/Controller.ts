@@ -118,28 +118,23 @@ try{
    const old=await userModel.findOne({email})
 
     if(old){
-        return res.status(200).json({msg:"User Already Exist"})
+        return res.status(400).json({msg:"User Already Exist in this email address"})
     }
     else {
         const numSaltRounds = 10;
-        const hash=bcrypt.hash(password, numSaltRounds);
+        const hash=await bcrypt.hash(password, numSaltRounds);
         const User=await userModel.create({
             name:name,
             phoneNo:phoneNo,
             email:email,
             password:hash
-        }).then((data)=>{
-             sendEmail({email:email,emailType:"VERIFY",id:data._id.toString()})
         })
-
+        await sendEmail({email:email,id:User._id.toString()})
     }
 
-
-
-
-    return res.status(200).json({msg:"msg send"})
+    return res.status(200).json({msg:"you are signed in please Verify your email"})
 }catch(err){
-    return res.status(200).json({msg:"err while signing up"})
+    return res.status(400).json({msg:"err while signing up",err})
 }
 }
 

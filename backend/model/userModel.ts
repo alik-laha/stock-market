@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
         required: [true, "please provide your name"]
     },
     phoneNo: {
-        type: Number,
+        type: String,
         required: [true, "provide the PhoneNo"],
         maxLength: [10, "please check the number"]
     },
