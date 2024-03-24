@@ -58,4 +58,5 @@ input::-webkit-inner-spin-button {
 
 .error-confirmpass{
     color: red;
+    text-align: center;
 }

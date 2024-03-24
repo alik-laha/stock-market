@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import { sendEmail} from "../Helper/Mailer.js";
 import bcrypt from "bcryptjs"
 import userModel from "../model/userModel.js";
+import {login, signup} from "../Type/GlobalType.js";
+
 export const Searchdata=(req:Request,res:Response)=> {
     try {
         const {searchData}=req.body
@@ -113,7 +115,7 @@ export const ChartData=(req:Request,res:Response)=>{
 
 export const SignUp= async (req:Request,res:Response)=>{
 try{
-    const {name,email,phoneNo,password} = req.body
+    const {name,email,phoneNo,password}:signup = req.body
 
    const old=await userModel.findOne({email})
 
@@ -138,4 +140,31 @@ try{
 }
 }
 
+export const Login=async (req:Request,res:Response)=>{
+    try{
+
+        const{email,password}:login=req.body
+
+        const User=await userModel.findOne({email})
+
+        if(!User){
+            return res.status(400).json({msg:"This email is not Registered create a account"})
+        }
+        else{
+            const pass= await bcrypt.compare(password,User.password)
+
+           if(pass){
+
+               return res.status(200).json({msg:"You are logged in"})
+           }
+           else{
+
+               return res.status(400).json({msg:"Please Check The Password"})
+           }
+        }
+
+    }catch(err){
+        console.log(err)
+    }
+}
 

@@ -22,7 +22,8 @@ function SignUpPage() {
             axios.post("http://localhost:3000/api/signup", data).then((data1)=>{
                 console.log(data1)
             }).catch((err)=>{
-                setMsg((err.response.data.msg))
+                setMsg(err.response.data.msg)
+                setView("block")
             })
         }else{
             setView("block")
@@ -84,7 +85,7 @@ function SignUpPage() {
                 />
             </div>
           <p className="error-confirmpass" style={{display:view}}>
-              {msg}
+              *{msg}
           </p>
             <button className="signup-button">Sign Up</button>
             </form>
