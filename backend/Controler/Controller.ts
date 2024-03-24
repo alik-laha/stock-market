@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { sendEmail} from "../Helper/Mailer.js";
+import bcrypt from "bcryptjs"
 
 export const Searchdata=(req:Request,res:Response)=> {
     try {
@@ -112,6 +113,10 @@ export const ChartData=(req:Request,res:Response)=>{
 
 export const SignUp= async (req:Request,res:Response)=>{
 try{
+    const {name,email,phoneNo,password} = req.body
+
+    const numSaltRounds = 10;
+    const hash=bcrypt.hash(password, numSaltRounds);
 
    await sendEmail({email:"aliklaha0@gmail.com",emailType:"VERIFY",id:"sadbasg"})
     return res.status(200).json({msg:"msg send"})
