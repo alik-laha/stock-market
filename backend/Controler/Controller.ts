@@ -115,7 +115,7 @@ export const SignUp= async (req:Request,res:Response)=>{
 try{
     const {name,email,phoneNo,password} = req.body
 
-    const old=userModel.findOne({email})
+   const old=await userModel.findOne({email})
 
     if(old){
         return res.status(200).json({msg:"User Already Exist"})
@@ -128,12 +128,15 @@ try{
             phoneNo:phoneNo,
             email:email,
             password:hash
+        }).then((data)=>{
+             sendEmail({email:email,emailType:"VERIFY",id:data._id.toString()})
         })
+
     }
 
 
 
-   await sendEmail({email:"aliklaha0@gmail.com",emailType:"VERIFY",id:"sadbasg"})
+
     return res.status(200).json({msg:"msg send"})
 }catch(err){
     return res.status(200).json({msg:"err while signing up"})

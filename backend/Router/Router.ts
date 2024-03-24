@@ -11,7 +11,7 @@ router.post("/detail",Detail)
 
 router.post("/candle",ChartData)
 
-router.get("/email",SignUp)
+router.get("/signup",SignUp)
 export default router
 
 
