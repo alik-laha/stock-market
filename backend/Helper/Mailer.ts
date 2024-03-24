@@ -5,15 +5,19 @@ import {email} from "../Type/GlobalType.js";
 export const sendEmail=async({email,emailType,id}:email)=>{
     console.log(email)
     const transport = nodemailer.createTransport({
-        host: "sandbox.smtp.mailtrap.io",
-        port: 2525,
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure:false,
         auth: {
-            user: "8c76404aa3baf2",
-            pass: "b176ee2df5d40a"
+            user:process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASSWORD
         }
     });
     const Mail={
-        from: 'aliklaha0@gmail.com',
+        from:{
+            name:"Alik laha",
+            address:process.env.EMAIL_USER!
+        },
             to: email,
         subject: emailType==="Varify" ? "Varify Your Email" : "Forgot Password",
         text: "Hello world?",

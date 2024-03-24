@@ -110,9 +110,11 @@ export const ChartData=(req:Request,res:Response)=>{
     }
 }
 
-export const SignUp=(req:Request,res:Response)=>{
+export const SignUp= async (req:Request,res:Response)=>{
 try{
 
+   await sendEmail({email:"aliklaha0@gmail.com",emailType:"VERIFY",id:"sadbasg"})
+    return res.status(200).json({msg:"msg send"})
 }catch(err){
     return res.status(200).json({msg:"err while signing up"})
 }
