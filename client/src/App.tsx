@@ -7,6 +7,7 @@ import Profile from "../component/Profile/Profile.tsx";
 import About from "../component/About/About.tsx";
 import Signup from "../component/Signup/Signup.tsx";
 import FloatingWindow from "../component/FloatingSearchBar/FloatingSearchBar.tsx";
+import EmailConfirm from "../component/emailCofirm/EmailConfirm.tsx";
 function App() {
 
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/profile" element={<><Navbar/><FloatingWindow/><Profile/>  </>}/>
         <Route path="/about" element={<><Navbar/><FloatingWindow/><About/>  </>}/>
         <Route path="/signup" element={<Signup/>} />
+        <Route path="/user/verification/confirm/email" element={<EmailConfirm/>} />
         </Routes>
     </>
   )

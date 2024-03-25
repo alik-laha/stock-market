@@ -113,6 +113,8 @@ export const ChartData=(req:Request,res:Response)=>{
     }
 }
 
+
+//User signup
 export const SignUp= async (req:Request,res:Response)=>{
 try{
     const {name,email,phoneNo,password}:signup = req.body
@@ -140,6 +142,8 @@ try{
 }
 }
 
+
+//User login
 export const Login=async (req:Request,res:Response)=>{
     try{
 
