@@ -23,7 +23,7 @@ const FloatingWindow = () => {
                 {
                     data.map((res:searchData,index:number)=>{
                         return (
-                            <div key={index}>
+                            <div key={index} className="searched-element">
                                 <p>
                                     {res.title}
                                 </p>
