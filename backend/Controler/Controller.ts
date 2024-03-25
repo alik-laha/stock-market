@@ -138,7 +138,7 @@ try{
         const token = jwt.sign({
             id: User._id,
             email:User.email
-        }, process.env.SECURITY_KEY!, {expiresIn: '5h'});
+        }, process.env.SECURITY_KEY!, {expiresIn: process.env.EXPIRE_TIME});
         return res.status(200).json({msg:"you are signed in please Verify your email",Token:token})
     }
 
@@ -167,7 +167,7 @@ export const Login=async (req:Request,res:Response)=>{
                const token = jwt.sign({
                    id: User._id,
                    email:User.email
-               }, process.env.SECURITY_KEY!, {expiresIn: '5h'});
+               }, process.env.SECURITY_KEY!, {expiresIn: process.env.EXPIRE_TIME});
 
                return res.status(200).json({msg:"You are logged in",Token:token})
            }

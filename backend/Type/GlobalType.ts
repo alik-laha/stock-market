@@ -16,3 +16,10 @@ export interface login{
     email:string,
     password:string
 }
+
+export interface Verify{
+    id:string,
+    email:string,
+    iat:number,
+    exp:number
+}

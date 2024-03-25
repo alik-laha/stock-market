@@ -9,7 +9,7 @@ import Context from "../../src/Context/Context.ts";
 function Navbar() {
     const {setSearchData}=useContext(Context)
     const handleChange=(e:ChangeEvent<HTMLInputElement>)=>{
-       axios.post("http://localhost:3000/api/search",{searchData:e.target.value})
+       axios.post("http://localhost:3000/api/search",{searchData:e.target.value},{headers:{"Auth":localStorage.getItem("Token")}})
            .then((res)=>{
               setSearchData(res.data.data.content)
                // console.log(res.data.data.content)
