@@ -3,6 +3,7 @@ import { sendEmail} from "../Helper/Mailer.js";
 import bcrypt from "bcryptjs"
 import userModel from "../model/userModel.js";
 import {login, signup} from "../Type/GlobalType.js";
+import jwt from "jsonwebtoken"
 
 export const Searchdata=(req:Request,res:Response)=> {
     try {
@@ -134,9 +135,14 @@ try{
             password:hash
         })
         await sendEmail({email:email,id:User._id.toString()})
+        const token = jwt.sign({
+            id: User._id,
+            email:User.email
+        }, process.env.SECURITY_KEY!, {expiresIn: '5h'});
+        return res.status(200).json({msg:"you are signed in please Verify your email",Token:token})
     }
 
-    return res.status(200).json({msg:"you are signed in please Verify your email"})
+
 }catch(err){
     return res.status(400).json({msg:"err while signing up",err})
 }
@@ -158,8 +164,12 @@ export const Login=async (req:Request,res:Response)=>{
             const pass= await bcrypt.compare(password,User.password)
 
            if(pass){
+               const token = jwt.sign({
+                   id: User._id,
+                   email:User.email
+               }, process.env.SECURITY_KEY!, {expiresIn: '5h'});
 
-               return res.status(200).json({msg:"You are logged in"})
+               return res.status(200).json({msg:"You are logged in",Token:token})
            }
            else{
 

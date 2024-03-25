@@ -3,7 +3,7 @@ import '../Signup/Signup.css';
 import axios from "axios";
 import {NavLink} from "react-router-dom"; // Import CSS file for styling
 
-function SignUpPage() {
+function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [view,setView]=useState("none")
@@ -15,8 +15,9 @@ function SignUpPage() {
            password
        }
        axios.post("http://localhost:3000/api/login",data1)
-           .then((data)=>{
-               console.log(data)
+           .then((res)=>{
+               console.log(res)
+               localStorage.setItem("Token",res.data.Token)
            })
            .catch((err)=>{
                setMsg(err.response.data.msg)
@@ -64,4 +65,4 @@ function SignUpPage() {
     );
 }
 
-export default SignUpPage;
+export default LoginPage;
