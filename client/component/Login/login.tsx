@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import '../Signup/Signup.css';
-import axios from "axios"; // Import CSS file for styling
+import axios from "axios";
+import {NavLink} from "react-router-dom"; // Import CSS file for styling
 
 function SignUpPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const [view,setView]=useState("none")
+    const [msg,setMsg]=useState("")
     const handleSignUp = (e:React.FormEvent<HTMLFormElement>) => {
        e.preventDefault();
        const data1={
@@ -17,7 +19,14 @@ function SignUpPage() {
                console.log(data)
            })
            .catch((err)=>{
-               console.log(err)
+               setMsg(err.response.data.msg)
+               if(err.response.data.msg==="This email is not Registered create a account"){
+                   setEmail("")
+                   setPassword("")
+               }else if(err.response.data.msg==="Please Check The Password"){
+                   setPassword("")
+               }
+               setView("block")
            })
     };
 
@@ -43,6 +52,12 @@ function SignUpPage() {
                     required
                 />
             </div>
+                <p style={{display:view}} className="error-confirmpass">
+                    *{msg}
+                </p>
+                <p style={{textAlign:"center"}}>
+                    Create New Account click <NavLink to="/signup">Here</NavLink>
+                </p>
             <button className="signup-button">Log-In</button>
             </form>
         </div>
