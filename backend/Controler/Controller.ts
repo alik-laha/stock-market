@@ -187,15 +187,26 @@ export const Login=async (req:Request,res:Response)=>{
 
 //Mail verify
 export const VerifyMail=async(req:Request,res:Response)=>{
-    const {id,verify}=req.body
-    const User  =await userModel.findById(id)
-
-    if(!User){
-        return res.status(400).json({msg:"no user is avail able in this id"})
+    try {
+        const {id, verify} = req.body
+        const User:any = await userModel.findById(id)
+        const date=Date.now()
+        if (!User) {
+            return res.status(400).json({msg: "no user is avail able in this id"})
+        } else {
+            if (User.verifyTokenExpiry <= date) {
+                if (User.verifyToken === verify) {
+                    await userModel.findByIdAndUpdate(id, {isVerified: true})
+                    return res.status(200).json({msg: "you are verified"})
+                }
+                else{
+                    return res.status(200).json({msg:"please re login your acount for verify"})
+                }
+            }
+        }
     }
-    if(User.verifyToken===verify){
-        await userModel.findByIdAndUpdate(id,{isVerified:true})
-        return res.status(200).json({msg:"you are verified"})
+    catch (err){
+        console.log(err)
     }
 
 }

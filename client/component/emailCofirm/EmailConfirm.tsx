@@ -1,10 +1,19 @@
 import {useState} from "react";
+import axios from "axios";
 
 const EmailConfirm=()=>{
     const [fireworkVisible, setFireworkVisible] = useState(false);
 
-    const handleClick = () => {
-        //fire work
+    const handleClick =  () => {
+        const id = localStorage.getItem("id")
+        const verify= localStorage.getItem("verify")
+        axios.post("http://localhost:3000/api/verify/user",{id,verify})
+            .then((data)=>{
+                console.log(data)
+            })
+            .catch(err=>{
+                console.log(err)
+            })
         setFireworkVisible(true);
 
         setTimeout(() => {
