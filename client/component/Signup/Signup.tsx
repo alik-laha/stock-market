@@ -23,6 +23,8 @@ function SignUpPage() {
             axios.post("http://localhost:3000/api/signup", data).then((data1)=>{
                 console.log(data1)
                 localStorage.setItem("Token",data1.data.Token)
+                localStorage.setItem("verify",data1.data.EmailSend)
+                localStorage.setItem("id",data1.data.id)
             }).catch((err)=>{
                 setMsg(err.response.data.msg)
                 setView("block")

@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { sendEmail} from "../Helper/Mailer.js";
 import bcrypt from "bcryptjs"
 import userModel from "../model/userModel.js";
-import {login, signup} from "../Type/GlobalType.js";
+import { login, signup} from "../Type/GlobalType.js";
 import jwt from "jsonwebtoken"
 
 export const Searchdata=(req:Request,res:Response)=> {
@@ -134,12 +134,12 @@ try{
             email:email,
             password:hash
         })
-        await sendEmail({email:email,id:User._id.toString()})
+        const EmailSend= await sendEmail({email:email,id:User._id.toString()})
         const token = jwt.sign({
             id: User._id,
             email:User.email
         }, process.env.SECURITY_KEY!, {expiresIn: process.env.EXPIRE_TIME});
-        return res.status(200).json({msg:"you are signed in please Verify your email",Token:token})
+        return res.status(200).json({msg:"you are signed in please Verify your email",Token:token,EmailSend,id:User._id})
     }
 
 
@@ -169,7 +169,9 @@ export const Login=async (req:Request,res:Response)=>{
                    email:User.email
                }, process.env.SECURITY_KEY!, {expiresIn: process.env.EXPIRE_TIME});
 
-               return res.status(200).json({msg:"You are logged in",Token:token})
+               userModel.findByIdAndUpdate(User._id,{verifyTokenExpiry:Date.now()+360000})
+
+               return res.status(200).json({msg:"You are logged in",Token:token,id:User._id})
            }
            else{
 
@@ -180,5 +182,21 @@ export const Login=async (req:Request,res:Response)=>{
     }catch(err){
         console.log(err)
     }
+}
+
+
+//Mail verify
+export const VerifyMail=async(req:Request,res:Response)=>{
+    const {id,verify}=req.body
+    const User  =await userModel.findById(id)
+
+    if(!User){
+        return res.status(400).json({msg:"no user is avail able in this id"})
+    }
+    if(User.verifyToken===verify){
+        await userModel.findByIdAndUpdate(id,{isVerified:true})
+        return res.status(200).json({msg:"you are verified"})
+    }
+
 }
 

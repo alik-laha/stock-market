@@ -34,7 +34,7 @@ export const sendEmail=async({email,id}:email)=>{
             "<p>if link is not working copy the link and paste on your browser <br/> link is valid for only 1 hour</p>",
     }
 
-   return await transport.sendMail(Mail)
+   return await transport.sendMail(Mail),hash
 
 }
 
