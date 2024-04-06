@@ -16,7 +16,7 @@ router.post("/signup",SignUp)
 
 router.post("/login",Login)
 
-router.post("/verify/user",VerifyMail)
+router.get("/verify/user",VerifyMail)
 
 export default router
 

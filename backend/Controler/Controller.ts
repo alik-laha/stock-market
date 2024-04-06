@@ -139,7 +139,11 @@ try{
             id: User._id,
             email:User.email
         }, process.env.SECURITY_KEY!, {expiresIn: process.env.EXPIRE_TIME});
-        return res.status(200).json({msg:"you are signed in please Verify your email",Token:token,EmailSend,id:User._id})
+
+            res.cookie("token",token,{httpOnly:true,secure:true})
+            res.cookie("verify",EmailSend,{httpOnly:true,secure:true})
+
+        return res.status(200).json({msg:"you are signed in please Verify your email"})
     }
 
 
@@ -171,7 +175,7 @@ export const Login=async (req:Request,res:Response)=>{
 
                userModel.findByIdAndUpdate(User._id,{verifyTokenExpiry:Date.now()+360000})
 
-               return res.status(200).json({msg:"You are logged in",Token:token,id:User._id})
+               return res.status(200).cookie("token",token,{httpOnly:true}).json({msg:"You are logged in"})
            }
            else{
 
@@ -188,22 +192,8 @@ export const Login=async (req:Request,res:Response)=>{
 //Mail verify
 export const VerifyMail=async(req:Request,res:Response)=>{
     try {
-        const {id, verify} = req.body
-        const User:any = await userModel.findById(id)
-        const date=Date.now()
-        if (!User) {
-            return res.status(400).json({msg: "no user is avail able in this id"})
-        } else {
-            if (User.verifyTokenExpiry <= date) {
-                if (User.verifyToken === verify) {
-                    await userModel.findByIdAndUpdate(id, {isVerified: true})
-                    return res.status(200).json({msg: "you are verified"})
-                }
-                else{
-                    return res.status(200).json({msg:"please re login your acount for verify"})
-                }
-            }
-        }
+        console.log(req)
+
     }
     catch (err){
         console.log(err)

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import './Signup.css';
 import axios from "axios";
 import {NavLink} from "react-router-dom";
+
 
 function SignUpPage() {
     const [username, setUsername] = useState('');
@@ -20,11 +21,8 @@ function SignUpPage() {
                 phoneNo: phoneNo,
                 password:password
             }
-            axios.post("http://localhost:3000/api/signup", data).then((data1)=>{
+            axios.post("/api/signup", data).then((data1)=>{
                 console.log(data1)
-                localStorage.setItem("Token",data1.data.Token)
-                localStorage.setItem("verify",data1.data.EmailSend)
-                localStorage.setItem("id",data1.data.id)
             }).catch((err)=>{
                 setMsg(err.response.data.msg)
                 setView("block")

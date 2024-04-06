@@ -5,9 +5,7 @@ const EmailConfirm=()=>{
     const [fireworkVisible, setFireworkVisible] = useState(false);
 
     const handleClick =  () => {
-        const id = localStorage.getItem("id")
-        const verify= localStorage.getItem("verify")
-        axios.post("http://localhost:3000/api/verify/user",{id,verify})
+        axios.get("/api/verify/user")
             .then((data)=>{
                 console.log(data)
             })
