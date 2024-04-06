@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { sendEmail} from "../Helper/Mailer.js";
 import bcrypt from "bcryptjs"
 import userModel from "../model/userModel.js";
-import { login, signup} from "../Type/GlobalType.js";
+import {cookie, login, signup} from "../Type/GlobalType.js";
 import jwt from "jsonwebtoken"
 
 export const Searchdata=(req:Request,res:Response)=> {
@@ -192,7 +192,10 @@ export const Login=async (req:Request,res:Response)=>{
 //Mail verify
 export const VerifyMail=async(req:Request,res:Response)=>{
     try {
-        console.log(req)
+       const cook:Record<string, any>=req.cookies!
+        const token =cook.token
+        const verify=cook.verify
+        console.log(token,verify)
 
     }
     catch (err){

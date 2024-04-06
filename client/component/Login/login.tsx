@@ -14,7 +14,7 @@ function LoginPage() {
            email,
            password
        }
-       axios.post("http://localhost:3000/api/login",data1)
+       axios.post("/api/login",data1)
            .then((res)=>{
                console.log(res)
                localStorage.setItem("Token",res.data.Token)
