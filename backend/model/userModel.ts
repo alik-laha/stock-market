@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
         default: false
    },
     verifyToken: String,
-    verifyTokenExpiry: Date,
+    verifyTokenExpiry: String,
 
 })
  export default mongoose.model("user", userSchema)

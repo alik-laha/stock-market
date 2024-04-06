@@ -22,8 +22,3 @@ export interface Verify{
     iat:number,
     exp:number
 }
-
-export interface cookie{
-    token:string,
-    verify:string
-}

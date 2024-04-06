@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { sendEmail} from "../Helper/Mailer.js";
 import bcrypt from "bcryptjs"
 import userModel from "../model/userModel.js";
-import {cookie, login, signup} from "../Type/GlobalType.js";
+import {login, signup} from "../Type/GlobalType.js";
 import jwt from "jsonwebtoken"
 
 export const Searchdata=(req:Request,res:Response)=> {
@@ -192,11 +192,29 @@ export const Login=async (req:Request,res:Response)=>{
 //Mail verify
 export const VerifyMail=async(req:Request,res:Response)=>{
     try {
-       const cook:Record<string, any>=req.cookies!
-        const token =cook.token
-        const verify=cook.verify
-        console.log(token,verify)
+        const verify: Record<string, any> = req.cookies.verify
+        if (verify) {
+            const User: any = await userModel.findOne({verifyToken: verify})
 
+            if (!User) {
+                return res.status(500).json({msg: "verification is failed"})
+            } else {
+                if (User.verifyTokenExpiry >= Date.now()) {
+                    User.isVerified = true
+                    User.verifyToken = ""
+
+                    await User.save()
+                    res.clearCookie("verify");
+                    return res.status(200).json({msg: "verification is confirm"})
+                } else {
+                    return res.status(500).json({msg: "verification is not possible plz login again"})
+                }
+
+            }
+        }
+        else{
+            return res.status(200).json({msg: "you are already verified"})
+        }
     }
     catch (err){
         console.log(err)

@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import {Verify} from "../Type/GlobalType.js";
 export function verifyToken(req: Request, res: Response, next: NextFunction) {
     try {
-        const data: { auth?: string } = req.headers as { auth?: string };
+        const data=req.cookies.token
 
         const token: string = data.auth || '';
         if (!token) {
