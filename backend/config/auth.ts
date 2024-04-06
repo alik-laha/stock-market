@@ -3,9 +3,9 @@ import jwt from 'jsonwebtoken';
 import {Verify} from "../Type/GlobalType.js";
 export function verifyToken(req: Request, res: Response, next: NextFunction) {
     try {
-        const data=req.cookies.token
+        const token=req.cookies.token
+        console.log(token)
 
-        const token: string = data.auth || '';
         if (!token) {
             return res.status(400).json({msg: "No Token found Please logout and re-Login"})
         } else {
