@@ -202,7 +202,7 @@ export const VerifyMail=async(req:Request,res:Response)=>{
                 if (User.verifyTokenExpiry >= Date.now()) {
                     User.isVerified = true
                     User.verifyToken = ""
-
+                    User.verifyTokenExpiry=""
                     await User.save()
                     res.clearCookie("verify");
                     return res.status(200).json({msg: "verification is confirm"})
