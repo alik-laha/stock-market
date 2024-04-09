@@ -67,16 +67,16 @@ export const HomeData=(req:Request,res:Response)=> {
 
 export const Detail=(req:Request,res:Response)=>{
     try{
-        const{searchId}=req.body
-        fetch(`https://groww.in/v1/api/stocks_data/v1/company/search_id/${searchId}?page=0&size=50`)
+        const data=req.params.id
+        fetch(`https://groww.in/v1/api/stocks_data/v1/company/search_id/${data}?page=0&size=50`)
             .then((res) => res.json())
             .then((data) => {
                 return res.status(200).json({data: data})
             }).catch((err) => {
-            return res.status(400).json({msg: "No data found"})
+            return res.status(400).json({msg: "No data found",err})
         })
     }catch(err){
-        return res.status(200).json({msg:"Internal server Error"})
+        return res.status(400).json({msg:"Internal server Error"})
     }
 }
 
@@ -221,4 +221,3 @@ export const VerifyMail=async(req:Request,res:Response)=>{
     }
 
 }
-

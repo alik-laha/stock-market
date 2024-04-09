@@ -11,6 +11,7 @@ const FloatingWindow = () => {
         if(searchData.length>0){
             setView("block")
             setData(searchData)
+            console.log(searchData)
         }
         else {
             setView("none")

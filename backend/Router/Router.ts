@@ -8,7 +8,7 @@ router.post("/",HomeData)
 
 router.post("/search",verifyToken,Searchdata)
 
-router.post("/detail",Detail)
+router.post("/detail/:id",Detail)
 
 router.post("/candle",ChartData)
 
