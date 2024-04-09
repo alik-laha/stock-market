@@ -143,7 +143,7 @@ try{
             res.cookie("token",token,{httpOnly:true,secure:true})
             res.cookie("verify",EmailSend,{httpOnly:true,secure:true})
 
-        return res.status(200).json({msg:"you are signed in please Verify your email"})
+        return res.status(200).json({msg:"you are signed in please Verify your email",Token:token})
     }
 
 
@@ -175,7 +175,7 @@ export const Login=async (req:Request,res:Response)=>{
 
                userModel.findByIdAndUpdate(User._id,{verifyTokenExpiry:Date.now()+360000})
 
-               return res.status(200).cookie("token",token,{httpOnly:true}).json({msg:"You are logged in"})
+               return res.status(200).cookie("token",token,{httpOnly:true}).json({msg:"You are logged in",Token:token})
            }
            else{
 

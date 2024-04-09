@@ -21,8 +21,9 @@ function SignUpPage() {
                 phoneNo: phoneNo,
                 password:password
             }
-            axios.post("/api/signup", data).then((data1)=>{
-                console.log(data1)
+            axios.post("/api/signup", data).then((res)=>{
+                console.log(res)
+                localStorage.setItem("Token",res.data.Token)
             }).catch((err)=>{
                 setMsg(err.response.data.msg)
                 setView("block")
