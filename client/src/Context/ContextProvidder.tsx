@@ -7,8 +7,9 @@ interface ContextProviderProps {
 }
 const ContextProvider=({children}:ContextProviderProps)=>{
     const [searchData,setSearchData]=useState<searchData[]>([])
+    const [individual,setIndevidual]=useState({})
     return(
-    <Context.Provider value={{searchData,setSearchData}}>
+    <Context.Provider value={{searchData,setSearchData,individual,setIndevidual}}>
         {children}
     </Context.Provider>
     )
