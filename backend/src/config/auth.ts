@@ -1,24 +1,22 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import {Verify} from "../Type/GlobalType.js";
+import { Verify } from "../../Type/GlobalType";
 export function verifyToken(req: Request, res: Response, next: NextFunction) {
     try {
-        const token=req.cookies.token
-        console.log(token)
-
+        const token = req.cookies.token
         if (!token) {
-            return res.status(400).json({msg: "No Token found Please logout and re-Login"})
+            return res.status(400).json({ msg: "No Token found Please logout and re-Login" })
         } else {
-            const decoded:Verify = Object(jwt.verify(token, process.env.SECURITY_KEY!));
-            if(decoded){
+            const decoded: Verify = Object(jwt.verify(token, process.env.SECURITY_KEY!));
+            if (decoded) {
                 next()
-            }else{
-                return res.status(400).json({msg: "your token is not valid"})
+            } else {
+                return res.status(400).json({ msg: "your token is not valid" })
             }
 
         }
     }
-    catch(err){
+    catch (err) {
         console.log(err)
     }
 }
