@@ -10,18 +10,14 @@ const StockOnNewsAll = () => {
     useEffect(() => {
         axios.post("/api/news", { page })
             .then((res) => {
-                if (res.data.data.errorMessage.message) {
-                    console.log(page)
+                if (res.data.data.exploreCompanies.STOCKS_IN_NEWS.length === 0) {
                     setPage((prev) => prev - 1)
                 }
-                if (res.data.data.exploreCompanies.STOCKS_IN_NEWS.length === 0) {
+                else {
                     setNews(res.data.data.exploreCompanies.STOCKS_IN_NEWS)
                 }
-
-
-
-
             }).catch((err) => {
+                setPage((prev) => prev - 1)
                 console.log(err)
             })
     }, [page])

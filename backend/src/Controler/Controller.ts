@@ -147,6 +147,7 @@ export const STOCKS_IN_NEWS = (req: Request, res: Response) => {
             .then((res) => res.json())
             .then((data) => {
                 return res.status(200).json({ data: data })
+
             }).catch((err) => {
                 return res.status(400).json({ msg: "No data found" })
             })

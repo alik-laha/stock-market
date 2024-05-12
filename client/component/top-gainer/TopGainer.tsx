@@ -16,10 +16,9 @@ const TopGainer = () => {
                     setGain(res.data.data.exploreCompanies.TOP_GAINERS)
                 }
 
-
-
             }).catch((err) => {
                 console.log(err)
+                setPage((prev) => prev - 1)
             })
     }, [page])
 

@@ -12,14 +12,13 @@ const TopLoser = () => {
             .then((res) => {
                 if (res.data.data.exploreCompanies.TOP_LOSERS.length === 0) {
                     setPage((prev) => prev - 1)
-                } else {
+                }
+                else {
                     setloser(res.data.data.exploreCompanies.TOP_LOSERS)
-
                 }
 
-
-
             }).catch((err) => {
+                setPage((prev) => prev - 1)
                 console.log(err)
             })
     }, [page])
