@@ -1,8 +1,4 @@
 import { Request, Response } from 'express';
-import { sendEmail } from "../Helper/Mailer";
-import bcrypt from "bcryptjs"
-import userModel from "../model/userModel";
-import jwt from "jsonwebtoken"
 
 export const Searchdata = (req: Request, res: Response) => {
 

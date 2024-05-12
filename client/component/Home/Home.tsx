@@ -1,29 +1,41 @@
-// import {useEffect,useState} from "react";
-// import axios from "axios";
-import {useContext} from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import StockOnNews from "./stockOnNews";
+import StockTopGainer from "./stockTopgain";
+import StockTopLoser from "./topLosser";
+import { useContext } from "react";
 import Context from "../../src/Context/Context.ts";
 
 
 
-const Home=()=>{
-    const {individual}=useContext(Context)
-    // const[page,setPage]=useState(0)
-    // const [size,setSize]=useState(5)
-    // const [type,setType] =useState("")
+const Home = () => {
+    const { individual, setGain, setLoser, setNews } = useContext(Context)
+    const [page, setPage] = useState(0)
+    const [size, setSize] = useState(5)
+    const [type, setType] = useState("")
     console.log(individual)
-    // useEffect(() => {
-    //     axios.post("http://localhost:3000/api",{page,size,type})
-    //         .then((data)=>{
-    //             console.log(data)
-    //         }).catch((err)=>{
-    //             console.log(err)
-    //     })
-    // }, []);
-    return(
-        <>
+    const fetchData = () => {
+        axios.post("/api/", { page, size, type })
+            .then((res) => {
+                console.log(res)
+                setNews(res.data.data.exploreCompanies.STOCKS_IN_NEWS)
+                setGain(res.data.data.exploreCompanies.TOP_GAINERS)
+                setLoser(res.data.data.exploreCompanies.TOP_LOSERS)
+            }).catch((err) => {
+                console.log(err)
+            })
+    }
 
-            <h1>Home</h1>
-        </>
+    useEffect(() => {
+        fetchData()
+        setInterval(fetchData, 10000);
+    }, []);
+    return (
+        <div>
+            <StockOnNews />
+            <StockTopGainer />
+            <StockTopLoser />
+        </div >
     )
 }
 export default Home

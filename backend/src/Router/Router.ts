@@ -5,6 +5,7 @@ import { ChartData, Detail, HomeData, Searchdata } from "../Controler/Controller
 
 router.post("/", HomeData)
 
+
 router.post("/search", Searchdata)
 
 router.get("/detail/:id", Detail)
