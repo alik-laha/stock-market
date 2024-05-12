@@ -1,8 +1,8 @@
 :root {
-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-.Confirm_Email{
+.Confirm_Email {
     background-color: #222222;
     color: white;
     display: flex;
@@ -15,7 +15,8 @@ box-sizing: border-box;
     flex-direction: column;
     border: none;
 }
-.Confirm_Email_Button{
+
+.Confirm_Email_Button {
     font-size: 21px;
     font-weight: bold;
     height: 6vh;
@@ -25,7 +26,7 @@ box-sizing: border-box;
     border: none;
 }
 
-.Confirm_Email_Button:hover{
+.Confirm_Email_Button:hover {
     color: #007bff;
 }
 
@@ -34,7 +35,8 @@ box-sizing: border-box;
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: linear-gradient(45deg, #f00, #ff0, #0ff, #f00); /* Adjust colors as desired */
+    background: linear-gradient(45deg, #f00, #ff0, #0ff, #f00);
+    /* Adjust colors as desired */
     animation: explode 2s ease-out forwards;
     transform: scale(0);
 }
@@ -44,8 +46,72 @@ box-sizing: border-box;
         transform: scale(0);
         opacity: 1;
     }
+
     100% {
         transform: scale(10);
         opacity: 0;
     }
+}
+
+.card-scroll-container {
+    margin-bottom: 20px;
+    overflow-x: scroll;
+    /* Add some bottom margin for spacing */
+}
+
+.card-scroll {
+    display: flex;
+    overflow-x: auto;
+    /* Enable horizontal scrolling */
+    /* scrollbar-width: none;
+    /* Hide scrollbar */
+    /* -ms-overflow-style: none; */
+    /* Hide scrollbar for IE & Edge */
+}
+
+/* .card-scroll::-webkit-scrollbar {
+    display: none;
+
+    /* Hide scrollbar for Chrome, Safari, and Opera */
+/* }  */
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-right: 15px;
+    /* Add some right margin between cards */
+}
+
+.card-content {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.card-image {
+    width: 80px;
+    /* Adjust image width as needed */
+    height: 80px;
+    /* Adjust image height as needed */
+    border-radius: 50%;
+    /* Make the image circular */
+    margin-right: 12px;
+    /* Add some right margin between image and text */
+}
+
+.text-content {
+    flex-grow: 1;
+    /* Allow text content to take remaining space */
+}
+
+.company-name {
+    margin: 0;
+    font-size: 16px;
+}
+
+.close-price {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    /* Change color of close price text */
 }

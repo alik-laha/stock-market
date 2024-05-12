@@ -11,7 +11,7 @@ import Context from "../../src/Context/Context.ts";
 const Home = () => {
     const { individual, setGain, setLoser, setNews } = useContext(Context)
     const [page, setPage] = useState(0)
-    const [size, setSize] = useState(5)
+    const [size, setSize] = useState(10)
     const [type, setType] = useState("")
     console.log(individual)
     const fetchData = () => {

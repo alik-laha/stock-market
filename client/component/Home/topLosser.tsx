@@ -4,17 +4,22 @@ import Context from "../../src/Context/Context.ts";
 const StockTopLooser = () => {
     const { loser } = useContext(Context)
     return (
-        <div>
-            <h4>Stock Top Loser</h4>
-            <div style={{ display: "flex" }}>
+        <div className="card-scroll-container">
+            <h4>Stock Top Lose</h4>
+            <button>more</button>
+            <div className="card-scroll">
                 {loser.map((item) => {
                     return (
-                        <div key={item.company.bseScriptCode}>
-                            <img src={item.company.imageUrl} alt="" />
-                            <h4>{item.company.companyName}</h4>
-                            <p>{item.stats.close}</p>
+                        <div key={item.company.bseScriptCode} className="card">
+                            <div className="card-content">
+                                <img src={item.company.imageUrl} alt={item.company.companyName} className="card-image" />
+                                <div className="text-content">
+                                    <h4 className="company-name">{item.company.companyName}</h4>
+                                    <p className="close-price">Close: {item.stats.close}</p>
+                                </div>
+                            </div>
                         </div>
-                    )
+                    );
                 })}
             </div>
         </div>
