@@ -15,7 +15,7 @@ const StockTopLooser = () => {
                                 <img src={item.company.imageUrl} alt={item.company.companyName} className="card-image" />
                                 <div className="text-content">
                                     <h4 className="company-name">{item.company.companyName}</h4>
-                                    <p className="close-price">Close: {item.stats.close}</p>
+                                    <p className="close-price">Price: {item.stats.close}</p>
                                 </div>
                             </div>
                         </div>

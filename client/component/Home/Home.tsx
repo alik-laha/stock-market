@@ -12,12 +12,20 @@ const Home = () => {
     const { individual, setGain, setLoser, setNews } = useContext(Context)
     const [page, setPage] = useState(0)
     const [size, setSize] = useState(10)
-    const [type, setType] = useState("")
     console.log(individual)
     const fetchData = () => {
-        axios.post("/api/", { page, size, type })
+        axios.post("/api", { page, size })
             .then((res) => {
                 console.log(res)
+                if (res.data.data.exploreCompanies.STOCKS_IN_NEWS.length === 0) {
+                    setPage((prev) => prev - 1)
+                }
+                if (res.data.data.exploreCompanies.TOP_GAINERS.length === 0) {
+                    setPage((prev) => prev - 1)
+                }
+                if (res.data.data.exploreCompanies.TOP_LOSERS.length === 0) {
+                    setPage((prev) => prev - 1)
+                }
                 setNews(res.data.data.exploreCompanies.STOCKS_IN_NEWS)
                 setGain(res.data.data.exploreCompanies.TOP_GAINERS)
                 setLoser(res.data.data.exploreCompanies.TOP_LOSERS)
@@ -28,13 +36,21 @@ const Home = () => {
 
     useEffect(() => {
         fetchData()
-        setInterval(fetchData, 10000);
-    }, []);
+    }, [size, page]);
     return (
         <div>
             <StockOnNews />
             <StockTopGainer />
             <StockTopLoser />
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "40px" }}>
+                <button onClick={() => setPage((prev) => prev + 1)}>Next</button>
+                <button onClick={() => setPage((prev) => {
+                    if (prev === 0) {
+                        return prev
+                    }
+                    return prev - 1
+                })}>Previous</button>
+            </div>
         </div >
     )
 }
