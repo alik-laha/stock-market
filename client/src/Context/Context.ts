@@ -12,6 +12,10 @@ interface ContextType {
     gain: Array<newsData>
     setLoser: (data: Array<newsData>) => void
     loser: Array<newsData>
+    gap: string
+    setGap: (data: string) => void
+    time: string
+    setTime: (data: string) => void
 }
 
 const Context = createContext<ContextType>({
@@ -24,7 +28,11 @@ const Context = createContext<ContextType>({
     setGain: () => { },
     gain: [],
     setLoser: () => { },
-    loser: []
+    loser: [],
+    gap: "1d",
+    setGap: () => { },
+    time: "1m",
+    setTime: () => { },
 });
 
 export default Context;

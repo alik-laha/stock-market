@@ -1,12 +1,24 @@
 import { useContext } from "react";
 import Context from "../../src/Context/Context.ts";
 import { useNavigate } from "react-router-dom";
+import { newsData } from "../../Type/GlobalType.ts";
+import axios from "axios";
 
 const StockTopGain = () => {
-    const { gain } = useContext(Context)
+    const { gain, time, gap } = useContext(Context)
     const navigate = useNavigate()
     const handleClick = () => {
         navigate("/top/gainer")
+    }
+    const handleTopgain = (item: newsData) => {
+        axios.post('/api/candle', { time, gap, CompanyName: item.company.companyShortName })
+            .then((res) => {
+                console.log(res.data)
+            }).catch((err) => {
+                console.log(err)
+            }
+            )
+        navigate("/detail")
     }
     return (
         <div className="card-scroll-container">
@@ -15,7 +27,7 @@ const StockTopGain = () => {
             <div className="card-scroll">
                 {gain.map((item) => {
                     return (
-                        <div key={item.company.bseScriptCode} className="card">
+                        <div key={item.company.bseScriptCode} className="card" onClick={() => handleTopgain(item)}>
                             <div className="card-content">
                                 <img src={item.company.imageUrl} alt={item.company.companyName} className="card-image" />
                                 <div className="text-content">
