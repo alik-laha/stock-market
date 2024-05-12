@@ -113,7 +113,7 @@ export const ChartData = (req: Request, res: Response) => {
 export const TOP_GAINERS = (req: Request, res: Response) => {
     const { page } = req.body
     try {
-        fetch(`https://groww.in/v1/api/stocks_data/v2/explore/list/top?discoveryFilterTypes=TOP_GAINERS&page=${page}&size=10`)
+        fetch(`https://groww.in/v1/api/stocks_data/v2/explore/list/top?discoveryFilterTypes=TOP_GAINERS&page=${page}&size=21`)
             .then((res) => res.json())
             .then((data) => {
                 return res.status(200).json({ data: data })
@@ -128,7 +128,7 @@ export const TOP_GAINERS = (req: Request, res: Response) => {
 export const TOP_LOSERS = (req: Request, res: Response) => {
     const { page } = req.body
     try {
-        fetch(`https://groww.in/v1/api/stocks_data/v2/explore/list/top?discoveryFilterTypes=TOP_LOSERS&page=${page}&size=20`)
+        fetch(`https://groww.in/v1/api/stocks_data/v2/explore/list/top?discoveryFilterTypes=TOP_LOSERS&page=${page}&size=21`)
             .then((res) => res.json())
             .then((data) => {
                 return res.status(200).json({ data: data })
@@ -143,7 +143,7 @@ export const TOP_LOSERS = (req: Request, res: Response) => {
 export const STOCKS_IN_NEWS = (req: Request, res: Response) => {
     const { page } = req.body
     try {
-        fetch(`https://groww.in/v1/api/stocks_data/v2/explore/list/top?discoveryFilterTypes=STOCKS_IN_NEWS&page=${page}&size=20`)
+        fetch(`https://groww.in/v1/api/stocks_data/v2/explore/list/top?discoveryFilterTypes=STOCKS_IN_NEWS&page=${page}&size=21`)
             .then((res) => res.json())
             .then((data) => {
                 return res.status(200).json({ data: data })

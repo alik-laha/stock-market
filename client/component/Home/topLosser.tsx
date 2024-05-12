@@ -1,12 +1,19 @@
 import { useContext } from "react";
 import Context from "../../src/Context/Context.ts";
+import { useNavigate } from "react-router-dom";
 
 const StockTopLooser = () => {
     const { loser } = useContext(Context)
+    const navigate = useNavigate()
+
+    const handleClick = () => {
+        navigate("/top/loser")
+    }
+
     return (
         <div className="card-scroll-container">
             <h4>Stock Top Lose</h4>
-            <button>more</button>
+            <button onClick={handleClick}>more</button>
             <div className="card-scroll">
                 {loser.map((item) => {
                     return (

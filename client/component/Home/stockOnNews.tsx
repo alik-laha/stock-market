@@ -1,12 +1,17 @@
 import { useContext } from "react";
 import Context from "../../src/Context/Context.ts";
+import { useNavigate } from "react-router-dom";
 
 const StockOnNews = () => {
     const { news } = useContext(Context)
+    const navigate = useNavigate()
+    const handleClick = () => {
+        navigate("/stockin/news")
+    }
     return (
         <div className="card-scroll-container">
             <h4>Stock On News</h4>
-            <button>more</button>
+            <button onClick={handleClick}>more</button>
             <div className="card-scroll">
                 {news.map((item) => {
                     return (

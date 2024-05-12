@@ -1,20 +1,12 @@
 import { useContext } from "react";
 import Context from "../../src/Context/Context.ts";
-import { useState } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const StockTopGain = () => {
-    const { gain, setGain } = useContext(Context)
-    const [page, setPage] = useState(0)
-
+    const { gain } = useContext(Context)
+    const navigate = useNavigate()
     const handleClick = () => {
-        axios.post("/api/top-gainer", { page })
-            .then((res) => {
-                console.log(res)
-                setGain(res.data.data.exploreCompanies.TOP_GAINERS)
-            }).catch((err) => {
-                console.log(err)
-            })
+        navigate("/top/gainer")
     }
     return (
         <div className="card-scroll-container">
