@@ -1,12 +1,20 @@
 import { useContext } from "react";
 import Context from "../../src/Context/Context.ts";
+import { useState } from "react";
+import axios from "axios";
 
 const StockTopGain = () => {
-    const { gain } = useContext(Context)
-
+    const { gain, setGain } = useContext(Context)
+    const [page, setPage] = useState(0)
 
     const handleClick = () => {
-        console.log('more')
+        axios.post("/api/top-gainer", { page })
+            .then((res) => {
+                console.log(res)
+                setGain(res.data.data.exploreCompanies.TOP_GAINERS)
+            }).catch((err) => {
+                console.log(err)
+            })
     }
     return (
         <div className="card-scroll-container">

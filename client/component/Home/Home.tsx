@@ -11,7 +11,7 @@ import Context from "../../src/Context/Context.ts";
 const Home = () => {
     const { individual, setGain, setLoser, setNews } = useContext(Context)
     const [page, setPage] = useState(0)
-    const [size, setSize] = useState(10)
+    const size = 10
     console.log(individual)
     const fetchData = () => {
         axios.post("/api", { page, size })
@@ -43,13 +43,13 @@ const Home = () => {
             <StockTopGainer />
             <StockTopLoser />
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "40px" }}>
-                <button onClick={() => setPage((prev) => prev + 1)}>Next</button>
                 <button onClick={() => setPage((prev) => {
                     if (prev === 0) {
                         return prev
                     }
                     return prev - 1
                 })}>Previous</button>
+                <button onClick={() => setPage((prev) => prev + 1)}>Next</button>
             </div>
         </div >
     )
