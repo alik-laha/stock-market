@@ -9,7 +9,7 @@ const ChartData = () => {
 
     const fetchCandaleData = () => {
         console.log(individualData)
-        axios.post('/api/candle', { time, CompanyName: individualData.company.companyShortName })
+        axios.post('/api/candle', { time, CompanyName: individualData.company.nseScriptCode })
             .then((res) => {
                 console.log(res.data)
                 setCandleData(res.data.data)
