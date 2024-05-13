@@ -2,22 +2,15 @@ import { useContext } from "react";
 import Context from "../../src/Context/Context.ts";
 import { useNavigate } from "react-router-dom";
 import { newsData } from "../../Type/GlobalType.ts";
-import axios from "axios";
 
 const StockTopGain = () => {
-    const { gain, time } = useContext(Context)
+    const { gain, setIndividualData } = useContext(Context)
     const navigate = useNavigate()
     const handleClick = () => {
         navigate("/top/gainer")
     }
     const handleTopgain = (item: newsData) => {
-        axios.post('/api/candle', { time, CompanyName: item.company.companyShortName })
-            .then((res) => {
-                console.log(res.data)
-            }).catch((err) => {
-                console.log(err)
-            }
-            )
+        setIndividualData(item)
         navigate("/detail")
     }
     return (

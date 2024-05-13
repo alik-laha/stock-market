@@ -9,34 +9,24 @@ import Context from "../../src/Context/Context.ts";
 
 
 const Home = () => {
-    const { individual, setGain, setLoser, setNews } = useContext(Context)
+    const { setGain, setLoser, setNews } = useContext(Context)
     const [page, setPage] = useState(0)
     const size = 10
-    console.log(individual)
     const fetchData = () => {
         axios.post("/api", { page, size })
             .then((res) => {
-                console.log(res)
-                if (res.data.data.exploreCompanies.STOCKS_IN_NEWS.length === 0) {
-                    setPage((prev) => prev - 1)
-                }
-                if (res.data.data.exploreCompanies.TOP_GAINERS.length === 0) {
-                    setPage((prev) => prev - 1)
-                }
-                if (res.data.data.exploreCompanies.TOP_LOSERS.length === 0) {
-                    setPage((prev) => prev - 1)
-                }
                 setNews(res.data.data.exploreCompanies.STOCKS_IN_NEWS)
                 setGain(res.data.data.exploreCompanies.TOP_GAINERS)
                 setLoser(res.data.data.exploreCompanies.TOP_LOSERS)
             }).catch((err) => {
                 console.log(err)
+                page === 0 ? setPage(0) : setPage(page - 1)
             })
     }
 
     useEffect(() => {
         fetchData()
-    }, [size, page]);
+    }, [page]);
     return (
         <div>
             <StockOnNews />

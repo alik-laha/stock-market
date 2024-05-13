@@ -13,7 +13,29 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
     const [loser, setLoser] = useState<newsData[]>([])
     const [time, setTime] = useState<string>("daily")
     const [candleData, setCandleData] = useState<[][]>([])
-    const [individualData, setIndividualData] = useState({})
+    const [individualData, setIndividualData] = useState<newsData>({
+        company: {
+            bseScriptCode: "",
+            companyShortName: "",
+            companyName: "",
+            imageUrl: "",
+            nseScriptCode: "",
+            isin: "",
+            searchId: "",
+            growwContractId: "",
+
+        }, stats: {
+            close: 0,
+            dayChange: 0,
+            dayChangePerc: 0,
+            high: 0,
+            highPriceRange: 0,
+            low: 0,
+            lowPriceRange: 0,
+            ltp: 0,
+            type: "",
+        }
+    })
     return (
         <Context.Provider value={{
             searchData, setSearchData, individual, setIndevidual, setNews, news, setGain, gain, loser, setLoser, time,

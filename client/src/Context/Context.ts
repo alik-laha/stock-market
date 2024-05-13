@@ -16,8 +16,8 @@ interface ContextType {
     setTime: (data: string) => void;
     candleData: Array<[]>;
     setCandleData: (data: Array<[]>) => void;
-    individualData: object;
-    setIndividualData: (data: object) => void;
+    individualData: newsData;
+    setIndividualData: (data: newsData) => void;
 }
 
 const Context = createContext<ContextType>({
@@ -35,7 +35,29 @@ const Context = createContext<ContextType>({
     setTime: () => { },
     candleData: [],
     setCandleData: () => { },
-    individualData: {}, // Provide an initial value, it can be an empty object {}
+    individualData: {
+        company: {
+            bseScriptCode: "",
+            companyShortName: "",
+            companyName: "",
+            imageUrl: "",
+            nseScriptCode: "",
+            isin: "",
+            searchId: "",
+            growwContractId: "",
+
+        }, stats: {
+            close: 0,
+            dayChange: 0,
+            dayChangePerc: 0,
+            high: 0,
+            highPriceRange: 0,
+            low: 0,
+            lowPriceRange: 0,
+            ltp: 0,
+            type: "",
+        }
+    },
     setIndividualData: () => { }
 });
 

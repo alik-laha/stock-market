@@ -6,6 +6,7 @@ import FloatingWindow from "../component/FloatingSearchBar/FloatingSearchBar.tsx
 import TopGainer from "../component/top-gainer/TopGainer.tsx";
 import TopLoser from "../component/top-loser/TopLoser.tsx";
 import StockOnNewsAll from '../component/stock-in-news/StocInNews.tsx';
+import ChartData from '../component/chartData/ChartData.tsx';
 function App() {
 
 
@@ -16,7 +17,8 @@ function App() {
         <Route path="/top/gainer" element={<><Navbar /><FloatingWindow /><TopGainer /></>} />
         <Route path="/top/loser" element={<><Navbar /><FloatingWindow /><TopLoser /></>} />
         <Route path="/stockin/news" element={<><Navbar /><FloatingWindow /><StockOnNewsAll /></>} />
-
+        <Route path="/detail" element={<><Navbar /><ChartData /></>} />
+        <Route path="*" element={<h1>404 Not Found</h1>} />
 
       </Routes>
     </>
