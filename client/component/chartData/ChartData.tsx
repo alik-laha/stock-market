@@ -1,29 +1,41 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Context from '../../src/Context/Context.ts';
 import { useNavigate } from 'react-router-dom';
-import { newsData } from '../../Type/GlobalType.ts';
+
 import axios from 'axios';
 
 const ChartData = () => {
-    const { individualData, setCandleData, time } = useContext(Context)
+    const { individualData, time } = useContext(Context);
+    const navigate = useNavigate();
 
-    const fetchCandaleData = () => {
-        console.log(individualData)
+    useEffect(() => {
+        fetchCandleData();
+        const intervalId = setInterval(fetchCandleData, 6000);
+
+        return () => {
+            clearInterval(intervalId);
+            console.log("Interval cleared:", intervalId);
+        };
+    }, [individualData]);
+
+    const fetchCandleData = () => {
+        if (!individualData || !individualData.company || !individualData.company.nseScriptCode) {
+            return;
+        }
+
         axios.post('/api/candle', { time, CompanyName: individualData.company.nseScriptCode })
             .then((res) => {
-                console.log(res.data)
-                setCandleData(res.data.data)
+                console.log(res.data);
+                setCandleData(res.data.data);
             }).catch((err) => {
-                console.log(err)
-            })
-    }
+                console.log(err);
+            });
+    };
     return (
-        <div>
-            <h1>Chart Data</h1>
-            <button onClick={fetchCandaleData}>Fetch Data</button>
+
+        <div style={{ width: "100%", height: "500px" }}>
         </div>
-    )
+    );
+};
 
-}
-
-export default ChartData
+export default ChartData;
