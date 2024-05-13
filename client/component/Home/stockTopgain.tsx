@@ -5,13 +5,13 @@ import { newsData } from "../../Type/GlobalType.ts";
 import axios from "axios";
 
 const StockTopGain = () => {
-    const { gain, time, gap } = useContext(Context)
+    const { gain, time } = useContext(Context)
     const navigate = useNavigate()
     const handleClick = () => {
         navigate("/top/gainer")
     }
     const handleTopgain = (item: newsData) => {
-        axios.post('/api/candle', { time, gap, CompanyName: item.company.companyShortName })
+        axios.post('/api/candle', { time, CompanyName: item.company.companyShortName })
             .then((res) => {
                 console.log(res.data)
             }).catch((err) => {
