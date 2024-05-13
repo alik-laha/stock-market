@@ -1,11 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { newsData } from "../../Type/GlobalType";
+import { useNavigate } from "react-router-dom";
+import Context from "../../src/Context/Context";
 import axios from "axios";
 
 
 const StockOnNewsAll = () => {
     const [page, setPage] = useState(0)
     const [news, setNews] = useState<newsData[]>([])
+    const navigate = useNavigate()
+    const { setIndividualData } = useContext(Context)
 
     useEffect(() => {
         axios.post("/api/news", { page })
@@ -21,6 +25,10 @@ const StockOnNewsAll = () => {
                 console.log(err)
             })
     }, [page])
+    const handleStockinnews = (item: newsData) => {
+        setIndividualData(item)
+        navigate("/detail")
+    }
 
     return (
         <div>
@@ -28,7 +36,7 @@ const StockOnNewsAll = () => {
                 {
                     news.map((item) => {
                         return (
-                            <div key={item.company.bseScriptCode} className="card">
+                            <div key={item.company.bseScriptCode} className="card" onClick={() => handleStockinnews(item)}>
                                 <div className="card-content">
                                     <img src={item.company.imageUrl} alt={item.company.companyName} className="card-image" />
                                     <div className="text-content">

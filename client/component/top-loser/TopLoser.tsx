@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import context from "../../src/Context/Context";
 import { newsData } from "../../Type/GlobalType";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
 const TopLoser = () => {
     const [page, setPage] = useState(0)
     const [loser, setloser] = useState<newsData[]>([])
-
+    const navigate = useNavigate()
+    const { setIndividualData } = useContext(context)
     useEffect(() => {
         axios.post("/api/top-loser", { page })
             .then((res) => {
@@ -22,6 +25,10 @@ const TopLoser = () => {
                 console.log(err)
             })
     }, [page])
+    const Toploser = (item: newsData) => {
+        setIndividualData(item)
+        navigate("/detail")
+    }
 
     return (
         <div>
@@ -29,7 +36,7 @@ const TopLoser = () => {
                 {
                     loser.map((item) => {
                         return (
-                            <div key={item.company.bseScriptCode} className="card">
+                            <div key={item.company.bseScriptCode} className="card" onClick={() => Toploser(item)}>
                                 <div className="card-content">
                                     <img src={item.company.imageUrl} alt={item.company.companyName} className="card-image" />
                                     <div className="text-content">

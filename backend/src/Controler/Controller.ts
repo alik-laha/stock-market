@@ -78,7 +78,7 @@ export const Detail = (req: Request, res: Response) => {
 
 export const ChartData = (req: Request, res: Response) => {
     try {
-        const { time, gap, CompanyName } = req.body
+        const { time, CompanyName } = req.body
         let interval
         if (time === "weekly") {
             interval = "intervalInMinutes"
@@ -98,7 +98,7 @@ export const ChartData = (req: Request, res: Response) => {
         else if (time === "all") {
             interval = "noOfCandles"
         }
-        fetch(`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${CompanyName}/${time}?${interval}=${gap}&minimal=true`)
+        fetch(`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${CompanyName}/${time}?${interval}=&minimal=true`)
             .then((res) => res.json())
             .then((data) => {
                 return res.status(200).json({ data: data })

@@ -1,12 +1,17 @@
 import { useContext } from "react";
 import Context from "../../src/Context/Context.ts";
 import { useNavigate } from "react-router-dom";
+import { newsData } from "../../Type/GlobalType.ts";
 
 const StockOnNews = () => {
-    const { news } = useContext(Context)
+    const { news, setIndividualData } = useContext(Context)
     const navigate = useNavigate()
     const handleClick = () => {
         navigate("/stockin/news")
+    }
+    const handleStockinnews = (item: newsData) => {
+        setIndividualData(item)
+        navigate("/detail")
     }
     return (
         <div className="card-scroll-container">
@@ -15,7 +20,7 @@ const StockOnNews = () => {
             <div className="card-scroll">
                 {news.map((item) => {
                     return (
-                        <div key={item.company.bseScriptCode} className="card">
+                        <div key={item.company.bseScriptCode} className="card" onClick={() => handleStockinnews(item)}>
                             <div className="card-content">
                                 <img src={item.company.imageUrl} alt={item.company.companyName} className="card-image" />
                                 <div className="text-content">
