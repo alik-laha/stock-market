@@ -36,10 +36,12 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
             type: "",
         }
     })
+    const [linearChartData, setLinearChartData] = useState<[][]>([])
+
     return (
         <Context.Provider value={{
             searchData, setSearchData, individual, setIndevidual, setNews, news, setGain, gain, loser, setLoser, time,
-            setTime, candleData, setCandleData, individualData, setIndividualData
+            setTime, candleData, setCandleData, individualData, setIndividualData, linearChartData, setLinearChartData
         }}>
             {children}
         </Context.Provider>

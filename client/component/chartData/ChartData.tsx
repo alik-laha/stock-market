@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useRef } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Context from '../../src/Context/Context.ts';
 import { useNavigate } from 'react-router-dom';
 import { createChart } from 'lightweight-charts';
@@ -8,6 +8,7 @@ const ChartData = () => {
     const { individualData, time } = useContext(Context);
     const navigate = useNavigate();
     const [candleData, setCandleData] = useState([]);
+    const [linearChartData, setLinearChartData] = useState([]);
     const Chartcontainer = document.getElementById('container');
 
     useEffect(() => {
@@ -28,14 +29,14 @@ const ChartData = () => {
                 lineColor: '#2962FF', topColor: '#2962FF',
                 bottomColor: 'rgba(41, 98, 255, 0.28)',
             });
-            areaSeries.setData(candleData);
+            areaSeries.setData(linearChartData);
             const candlestickSeries = chart.addCandlestickSeries({
                 upColor: '#26a69a', downColor: '#ef5350', borderVisible: false,
                 wickUpColor: '#26a69a', wickDownColor: '#ef5350',
             });
             candlestickSeries.setData(candleData);
         }
-    },);
+    }, [candleData, linearChartData]);
 
 
     const fetchCandleData = () => {
@@ -45,8 +46,8 @@ const ChartData = () => {
 
         axios.post('/api/candle', { time, CompanyName: individualData.company.nseScriptCode })
             .then((res) => {
-                console.log(res);
-                setCandleData(res.data.data);
+                setCandleData(res.data.data.candles);
+                setLinearChartData(res.data.data1.candles)
             }).catch((err) => {
                 console.log(err);
             });

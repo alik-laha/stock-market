@@ -18,6 +18,8 @@ interface ContextType {
     setCandleData: (data: Array<[]>) => void;
     individualData: newsData;
     setIndividualData: (data: newsData) => void;
+    linearChartData: Array<[]>;
+    setLinearChartData: (data: Array<[]>) => void;
 }
 
 const Context = createContext<ContextType>({
@@ -58,7 +60,9 @@ const Context = createContext<ContextType>({
             type: "",
         }
     },
-    setIndividualData: () => { }
+    setIndividualData: () => { },
+    linearChartData: [],
+    setLinearChartData: () => { }
 });
 
 export default Context;
