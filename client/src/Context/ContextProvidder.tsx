@@ -11,7 +11,7 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
     const [news, setNews] = useState<newsData[]>([])
     const [gain, setGain] = useState<newsData[]>([])
     const [loser, setLoser] = useState<newsData[]>([])
-    const [time, setTime] = useState<string>("daily")
+    const [time, setTime] = useState<string>("1y")
     const [candleData, setCandleData] = useState<[][]>([])
     const [individualData, setIndividualData] = useState<newsData>({
         company: {

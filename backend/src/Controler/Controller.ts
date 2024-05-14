@@ -107,7 +107,6 @@ export const ChartData = (req: Request, res: Response) => {
         fetch(`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${CompanyName}/${time}?${interval}=5`)
             .then((res) => res.json())
             .then((data) => {
-                console.log(`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${CompanyName}/${time}?${interval}=&minimal=true`)
                 fetch(`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${CompanyName}/${time}?${interval}=&minimal=true`)
                     .then((res) => res.json())
                     .then((data1) => {
