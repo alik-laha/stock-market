@@ -17,6 +17,7 @@ router.get("/detail/:id", Detail)
 
 router.post("/candle", ChartData)
 
+
 export default router
 
 

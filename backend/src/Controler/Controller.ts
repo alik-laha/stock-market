@@ -79,29 +79,42 @@ export const Detail = (req: Request, res: Response) => {
 export const ChartData = (req: Request, res: Response) => {
     try {
         const { time, CompanyName } = req.body
-        let interval
+        let interval: any
+
         if (time === "weekly") {
             interval = "intervalInMinutes"
+
         }
         else if (time === "1y") {
             interval = "intervalInDays"
+
         }
         else if (time === "daily") {
             interval = "intervalInMinutes"
+
         }
         else if (time === "5y") {
             interval = "intervalInDays"
+
         }
         else if (time === "3y") {
             interval = "intervalInDays"
+
         }
         else if (time === "all") {
             interval = "noOfCandles"
         }
-        fetch(`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${CompanyName}/${time}?${interval}=&minimal=true`)
+        fetch(`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${CompanyName}/${time}?${interval}=5`)
             .then((res) => res.json())
             .then((data) => {
-                return res.status(200).json({ data: data })
+                console.log(`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${CompanyName}/${time}?${interval}=&minimal=true`)
+                fetch(`https://groww.in/v1/api/charting_service/v2/chart/exchange/NSE/segment/CASH/${CompanyName}/${time}?${interval}=&minimal=true`)
+                    .then((res) => res.json())
+                    .then((data1) => {
+                        return res.status(200).json({ data, data1 })
+                    }).catch((err) => {
+                        return res.status(400).json({ msg: "No data found in get all data", error: err })
+                    })
             }).catch((err) => {
                 return res.status(400).json({ msg: "No data found" })
             })
