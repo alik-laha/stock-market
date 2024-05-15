@@ -1,31 +1,31 @@
 import { useState, useEffect, useContext } from "react";
-import { newsData } from "../../Type/GlobalType";
+import { newsData } from "../../../Type/GlobalType";
 import { useNavigate } from "react-router-dom";
-import Context from "../../src/Context/Context";
+import Context from "../../Context/Context";
 import axios from "axios";
 
 
-const TopGainer = () => {
+const StockOnNewsAll = () => {
     const [page, setPage] = useState(0)
-    const [gain, setGain] = useState<newsData[]>([])
+    const [news, setNews] = useState<newsData[]>([])
     const navigate = useNavigate()
     const { setIndividualData } = useContext(Context)
-    useEffect(() => {
-        axios.post("/api/top-gainer", { page })
-            .then((res) => {
-                if (res.data.data.exploreCompanies.TOP_GAINERS.length === 0) {
-                    setPage((prev) => prev - 1)
-                } else {
-                    setGain(res.data.data.exploreCompanies.TOP_GAINERS)
-                }
 
+    useEffect(() => {
+        axios.post("/api/news", { page })
+            .then((res) => {
+                if (res.data.data.exploreCompanies.STOCKS_IN_NEWS.length === 0) {
+                    setPage((prev) => prev - 1)
+                }
+                else {
+                    setNews(res.data.data.exploreCompanies.STOCKS_IN_NEWS)
+                }
             }).catch((err) => {
-                console.log(err)
                 setPage((prev) => prev - 1)
+                console.log(err)
             })
     }, [page])
-
-    const TopGainer = (item: newsData) => {
+    const handleStockinnews = (item: newsData) => {
         setIndividualData(item)
         navigate("/detail")
     }
@@ -34,9 +34,9 @@ const TopGainer = () => {
         <div>
             <div className="allView">
                 {
-                    gain.map((item) => {
+                    news.map((item) => {
                         return (
-                            <div key={item.company.bseScriptCode} className="card" onClick={() => TopGainer(item)}>
+                            <div key={item.company.bseScriptCode} className="card" onClick={() => handleStockinnews(item)}>
                                 <div className="card-content">
                                     <img src={item.company.imageUrl} alt={item.company.companyName} className="card-image" />
                                     <div className="text-content">
@@ -61,4 +61,4 @@ const TopGainer = () => {
         </div>
     )
 }
-export default TopGainer
+export default StockOnNewsAll

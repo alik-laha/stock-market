@@ -1,31 +1,31 @@
 import { useState, useEffect, useContext } from "react";
-import { newsData } from "../../Type/GlobalType";
+import context from "../../Context/Context";
+import { newsData } from "../../../Type/GlobalType";
 import { useNavigate } from "react-router-dom";
-import Context from "../../src/Context/Context";
 import axios from "axios";
 
 
-const StockOnNewsAll = () => {
+const TopLoser = () => {
     const [page, setPage] = useState(0)
-    const [news, setNews] = useState<newsData[]>([])
+    const [loser, setloser] = useState<newsData[]>([])
     const navigate = useNavigate()
-    const { setIndividualData } = useContext(Context)
-
+    const { setIndividualData } = useContext(context)
     useEffect(() => {
-        axios.post("/api/news", { page })
+        axios.post("/api/top-loser", { page })
             .then((res) => {
-                if (res.data.data.exploreCompanies.STOCKS_IN_NEWS.length === 0) {
+                if (res.data.data.exploreCompanies.TOP_LOSERS.length === 0) {
                     setPage((prev) => prev - 1)
                 }
                 else {
-                    setNews(res.data.data.exploreCompanies.STOCKS_IN_NEWS)
+                    setloser(res.data.data.exploreCompanies.TOP_LOSERS)
                 }
+
             }).catch((err) => {
                 setPage((prev) => prev - 1)
                 console.log(err)
             })
     }, [page])
-    const handleStockinnews = (item: newsData) => {
+    const Toploser = (item: newsData) => {
         setIndividualData(item)
         navigate("/detail")
     }
@@ -34,9 +34,9 @@ const StockOnNewsAll = () => {
         <div>
             <div className="allView">
                 {
-                    news.map((item) => {
+                    loser.map((item) => {
                         return (
-                            <div key={item.company.bseScriptCode} className="card" onClick={() => handleStockinnews(item)}>
+                            <div key={item.company.bseScriptCode} className="card" onClick={() => Toploser(item)}>
                                 <div className="card-content">
                                     <img src={item.company.imageUrl} alt={item.company.companyName} className="card-image" />
                                     <div className="text-content">
@@ -61,4 +61,4 @@ const StockOnNewsAll = () => {
         </div>
     )
 }
-export default StockOnNewsAll
+export default TopLoser

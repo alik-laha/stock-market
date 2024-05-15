@@ -1,27 +1,26 @@
 import { useContext } from "react";
-import Context from "../../src/Context/Context.ts";
+import Context from "../../Context/Context.ts";
 import { useNavigate } from "react-router-dom";
-import { newsData } from "../../Type/GlobalType.ts";
+import { newsData } from "../../../Type/GlobalType.ts";
 
-const StockTopLooser = () => {
-    const { loser, setIndividualData } = useContext(Context)
+const StockTopGain = () => {
+    const { gain, setIndividualData } = useContext(Context)
     const navigate = useNavigate()
-
     const handleClick = () => {
-        navigate("/top/loser")
+        navigate("/top/gainer")
     }
-    const handleToploser = (item: newsData) => {
+    const handleTopgain = (item: newsData) => {
         setIndividualData(item)
         navigate("/detail")
     }
     return (
         <div className="card-scroll-container">
-            <h4>Stock Top Lose</h4>
+            <h4>Stock Top Gain</h4>
             <button onClick={handleClick}>more</button>
             <div className="card-scroll">
-                {loser.map((item) => {
+                {gain.map((item) => {
                     return (
-                        <div key={item.company.bseScriptCode} className="card" onClick={() => handleToploser(item)}>
+                        <div key={item.company.bseScriptCode} className="card" onClick={() => handleTopgain(item)}>
                             <div className="card-content">
                                 <img src={item.company.imageUrl} alt={item.company.companyName} className="card-image" />
                                 <div className="text-content">
@@ -38,4 +37,4 @@ const StockTopLooser = () => {
 
 }
 
-export default StockTopLooser
+export default StockTopGain

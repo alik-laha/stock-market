@@ -1,12 +1,12 @@
 import './App.css'
 import { Route, Routes } from "react-router-dom";
-import Home from "../component/Home/Home";
+import Home from "./component/Home/Home";
 import Navbar from "../component/Navbar/Navbar";
 import FloatingWindow from "../component/FloatingSearchBar/FloatingSearchBar";
-import TopGainer from "../component/top-gainer/TopGainer";
-import TopLoser from "../component/top-loser/TopLoser";
-import StockOnNewsAll from '../component/stock-in-news/StocInNews';
-import ChartData from '../component/chartData/ChartData';
+import TopGainer from "./component/top-gainer/TopGainer";
+import TopLoser from "./component/top-loser/TopLoser";
+import StockOnNewsAll from './component/stock-in-news/StocInNews';
+import ChartData from './component/chartData/ChartData';
 function App() {
 
 

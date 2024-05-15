@@ -1,31 +1,31 @@
 import { useState, useEffect, useContext } from "react";
-import context from "../../src/Context/Context";
-import { newsData } from "../../Type/GlobalType";
+import { newsData } from "../../../Type/GlobalType";
 import { useNavigate } from "react-router-dom";
+import Context from "../../Context/Context";
 import axios from "axios";
 
 
-const TopLoser = () => {
+const TopGainer = () => {
     const [page, setPage] = useState(0)
-    const [loser, setloser] = useState<newsData[]>([])
+    const [gain, setGain] = useState<newsData[]>([])
     const navigate = useNavigate()
-    const { setIndividualData } = useContext(context)
+    const { setIndividualData } = useContext(Context)
     useEffect(() => {
-        axios.post("/api/top-loser", { page })
+        axios.post("/api/top-gainer", { page })
             .then((res) => {
-                if (res.data.data.exploreCompanies.TOP_LOSERS.length === 0) {
+                if (res.data.data.exploreCompanies.TOP_GAINERS.length === 0) {
                     setPage((prev) => prev - 1)
-                }
-                else {
-                    setloser(res.data.data.exploreCompanies.TOP_LOSERS)
+                } else {
+                    setGain(res.data.data.exploreCompanies.TOP_GAINERS)
                 }
 
             }).catch((err) => {
-                setPage((prev) => prev - 1)
                 console.log(err)
+                setPage((prev) => prev - 1)
             })
     }, [page])
-    const Toploser = (item: newsData) => {
+
+    const TopGainer = (item: newsData) => {
         setIndividualData(item)
         navigate("/detail")
     }
@@ -34,9 +34,9 @@ const TopLoser = () => {
         <div>
             <div className="allView">
                 {
-                    loser.map((item) => {
+                    gain.map((item) => {
                         return (
-                            <div key={item.company.bseScriptCode} className="card" onClick={() => Toploser(item)}>
+                            <div key={item.company.bseScriptCode} className="card" onClick={() => TopGainer(item)}>
                                 <div className="card-content">
                                     <img src={item.company.imageUrl} alt={item.company.companyName} className="card-image" />
                                     <div className="text-content">
@@ -61,4 +61,4 @@ const TopLoser = () => {
         </div>
     )
 }
-export default TopLoser
+export default TopGainer

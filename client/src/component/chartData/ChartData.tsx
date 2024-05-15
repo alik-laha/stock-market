@@ -1,6 +1,6 @@
 
 import { useContext, useEffect, useState, useRef } from 'react';
-import Context from '../../src/Context/Context.ts';
+import Context from '../../Context/Context';
 import { createChart } from 'lightweight-charts';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
