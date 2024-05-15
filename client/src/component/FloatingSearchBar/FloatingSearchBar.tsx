@@ -1,7 +1,7 @@
 import './floatingSearchBar.css';
 import { useContext, useEffect, useState } from "react";
-import Context from "../../Context/Context.ts";
-import { searchData } from "../../../Type/GlobalType.ts"; // Import CSS file for styling
+import Context from "../../Context/Context";
+import { searchData } from "../../../Type/GlobalType"; // Import CSS file for styling
 import axios from 'axios';
 
 const FloatingWindow = () => {

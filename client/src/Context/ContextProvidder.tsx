@@ -1,6 +1,6 @@
-import Context from "./Context.ts";
+import Context from "./Context";
 import { ReactNode, useState } from "react";
-import { newsData, searchData } from "../../Type/GlobalType.ts";
+import { newsData, searchData } from "../../Type/GlobalType";
 
 interface ContextProviderProps {
     children: ReactNode;

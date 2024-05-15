@@ -4,7 +4,7 @@ import StockOnNews from "./stockOnNews";
 import StockTopGainer from "./stockTopgain";
 import StockTopLoser from "./topLosser";
 import { useContext } from "react";
-import Context from "../../Context/Context.ts";
+import Context from "../../Context/Context";
 
 
 

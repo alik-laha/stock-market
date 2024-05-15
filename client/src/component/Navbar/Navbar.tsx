@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom"
 import { ChangeEvent } from "react";
 import axios from 'axios'
 import { useContext } from "react";
-import Context from "../../Context/Context.ts";
+import Context from "../../Context/Context";
 
 function Navbar() {
     const { setSearchData } = useContext(Context)

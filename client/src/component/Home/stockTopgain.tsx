@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import Context from "../../Context/Context.ts";
+import Context from "../../Context/Context";
 import { useNavigate } from "react-router-dom";
-import { newsData } from "../../../Type/GlobalType.ts";
+import { newsData } from "../../../Type/GlobalType";
 
 const StockTopGain = () => {
     const { gain, setIndividualData } = useContext(Context)

@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { newsData, searchData } from "../../Type/GlobalType.ts";
+import { newsData, searchData } from "../../Type/GlobalType";
 
 interface ContextType {
     setSearchData: (data: Array<searchData>) => void;
