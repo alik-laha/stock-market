@@ -2,6 +2,7 @@
 import { useContext, useEffect, useState, useRef } from 'react';
 import Context from '../../src/Context/Context.ts';
 import { createChart } from 'lightweight-charts';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const ChartData = () => {
@@ -10,6 +11,8 @@ const ChartData = () => {
     const [linearChartData, setLinearChartData] = useState([]);
 
     const chartContainerRef = useRef(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchCandleData();
@@ -44,10 +47,12 @@ const ChartData = () => {
         candlestickSeries.setData(formattedCandleData);
 
         chart.timeScale().fitContent();
+        return () => chart.remove();
     }, [candleData, linearChartData]);
 
     const fetchCandleData = () => {
         if (!individualData || !individualData.company || !individualData.company.nseScriptCode) {
+            navigate('/');
             return;
         }
 
@@ -104,7 +109,13 @@ const ChartData = () => {
     };
 
     return (
-        <div ref={chartContainerRef} id="Chartcontainer"></div>
+        <div>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <img src={individualData.company.imageUrl} style={{ width: "50px", height: "50px" }} />
+                <h2>{individualData.company.companyName}</h2>
+            </div>
+            <div ref={chartContainerRef} id="Chartcontainer" style={{ width: "100vw", height: "80vh" }}></div>
+        </div>
     );
 };
 
