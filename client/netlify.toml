@@ -1,7 +1,7 @@
 [[redirects]]
   from = "/api/*"
   force = true
-  to = "https://stock-market-9q8l.onrender.com/:splat"
+  to = "https://stock-market-9q8l.onrender.com/api/:splat"
   status = 200
 
 [[redirects]]
