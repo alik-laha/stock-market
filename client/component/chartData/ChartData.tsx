@@ -114,7 +114,7 @@ const ChartData = () => {
                 <img src={individualData.company.imageUrl} style={{ width: "50px", height: "50px" }} />
                 <h2>{individualData.company.companyName}</h2>
             </div>
-            <div ref={chartContainerRef} id="Chartcontainer" style={{ width: "100vw", height: "80vh" }}></div>
+            <div ref={chartContainerRef} id="Chartcontainer" style={{ width: "100vw", height: "75vh" }}></div>
         </div>
     );
 };
